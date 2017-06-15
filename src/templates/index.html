@@ -8,11 +8,13 @@
     </head>
     <body>
     <h3>{{ title }} template</h3>
-    {% for i in object_list %}
-        {{ i.id }}
-        {{ i.title }}
-        {{ i.content }}
-        {{ i.timestamp }}<br/>
+    {% for obj in object_list %}
+    {% url "posts:detail" id=obj.id %}
+        {{ obj.id }}
+
+        <a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a>
+        {{ obj.content }}
+        {{ obj.timestamp }}<br/>
     {% endfor %}
     {{ instance }}
     </body>

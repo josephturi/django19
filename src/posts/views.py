@@ -15,9 +15,9 @@ def post_list(request):
     }
     return render(request, "index.html", context)
 
-def post_detail(request, post_id=None):
+def post_detail(request, id=None):
     # instance = Post.objects.get(pk=1)
-    instance = get_object_or_404(Post, id=post_id)
+    instance = get_object_or_404(Post, id=id)
     context = {
         "title": instance.title,
         "instance": instance,

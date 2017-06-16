@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PostForm
@@ -26,7 +27,7 @@ def post_create(request):
     return render(request, "post_form.html", context)
 
 def post_list(request):
-    queryset = Post.objects.all()
+    queryset = Post.objects.all()#.order_by("-timestamp")
     context = {
         "title": "List",
         "object_list": queryset,
@@ -65,4 +66,5 @@ def post_delete(request, id=None):
     instance.delete()
     messages.success(request, 'Successfuly deleted', extra_tags='html_safe')
     return redirect('posts:list')
+
 

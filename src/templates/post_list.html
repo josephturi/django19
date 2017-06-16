@@ -1,20 +1,45 @@
 {% extends 'base.html' %}
-
-
 {% block content %}
-    <h3>{{ title }} template</h3>
-    {% for obj in object_list %}
-    {% url "posts:detail" id=obj.id %}
-        {{ obj.id }}
 
-        <a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a>
-        {{ obj.content }}
-        {{ obj.timestamp }}
-        <a href="{{ obj.id }}/edit">Update</a>
-        <a href="{{ obj.id }}/delete">Delete</a><br/>
-    {% endfor %}
-    <br>
+<div class="col-sm-8 col-sm-offset-2">
+
+    <h1>{{ title }}</h1>
     <a href="{% url 'posts:create' %}">Create</a>
+
+{% for obj in object_list %}
+<div class="row">
+
+
+  <div class="col-sm-12">
+    <div class="thumbnail">
+      <!--<img src="..." alt="...">-->
+      <div class="caption">
+        <h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h3>
+        <p>
+            <div class="container">
+
+                {{ obj.id }}
+
+                {{ obj.content|truncatechars:70 }}<br/>
+                {{ obj.timestamp }}<br/>
+                ({{ obj.timestamp|timesince }} ago)
+            </div>
+        </p>
+        <p><a href="{{ obj.id }}/edit" class="btn btn-primary" role="button">Edit</a>
+        <a href="{{ obj.id }}/delete" class="btn btn-default" role="button">Delete</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--{% cycle ""     "</div></div class='row'>"   %}-->
+<!--{% cycle "" "<div class='col-sm-12'><hr/></div></div></div class='row'>" %}-->
+{% endfor %}
+</div>
+
+
+
 
 {% endblock content %}
 

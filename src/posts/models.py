@@ -21,3 +21,6 @@ class Post(models.Model):
         return reverse("posts:detail", kwargs={"id": self.id})
         # return "%s" %(self.id)
         # return "/post/%s/" %(self.id)
+
+    class Meta:
+        ordering = ["-timestamp", "-updated"]

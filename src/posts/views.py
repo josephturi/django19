@@ -11,8 +11,10 @@ def post_create(request):
         instance = form.save(commit=False)
         print(form.cleaned_data.get("title"))
         instance.save()
-        messages.success(request, 'Successful')
+        messages.success(request, 'Successful Create', extra_tags='html_safe')
         return HttpResponseRedirect(instance.get_absolute_url())
+    if not form.is_valid:
+        messages.error(request, 'Save failed Create', extra_tags='html_safe')
     # if request.method == "POST":
     #     print(request.POST.get("title"))
     #     print(request.POST.get("content"))
@@ -45,8 +47,10 @@ def post_update(request, id=None):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
+        messages.success(request, 'Successful Update', extra_tags='html_safe')
         return HttpResponseRedirect(instance.get_absolute_url())
-
+    # else:
+    #     messages.error(request, 'Save failed Update', extra_tags='html_safe')
     context = {
         "title": instance.title,
         "content": instance.content,

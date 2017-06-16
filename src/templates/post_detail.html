@@ -7,7 +7,14 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
-
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.tags %} class="{{ message.tags }}"
+        {% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
     Title: {{ title }}<br/>
     Id: {{ instance.id }}<br/>
     Content: {{ instance.content }}<br/>

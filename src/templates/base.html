@@ -1,0 +1,20 @@
+
+<html lang="en">
+    <head>
+        <title>        {% block head_title %}Django 1.9{% endblock head_title %}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+        {% include 'messages_display.html' %}
+
+        {% block content %}
+
+        {% endblock content %}
+
+        </div>
+
+    </body>
+</html>

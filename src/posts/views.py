@@ -12,7 +12,8 @@ def post_create(request):
         print(form.cleaned_data.get("title"))
         instance.save()
         messages.success(request, 'Successful Create', extra_tags='html_safe')
-        return HttpResponseRedirect(instance.get_absolute_url())
+        return redirect('posts:list')
+        # return HttpResponseRedirect(instance.get_absolute_url())
     if not form.is_valid:
         messages.error(request, 'Save failed Create', extra_tags='html_safe')
     # if request.method == "POST":
@@ -30,7 +31,7 @@ def post_list(request):
         "title": "List",
         "object_list": queryset,
     }
-    return render(request, "index.html", context)
+    return render(request, "post_list.html", context)
 
 def post_detail(request, id=None):
     # instance = Post.objects.get(pk=1)
@@ -48,7 +49,8 @@ def post_update(request, id=None):
         instance = form.save(commit=False)
         instance.save()
         messages.success(request, 'Successful Update', extra_tags='html_safe')
-        return HttpResponseRedirect(instance.get_absolute_url())
+        return redirect('posts:list')
+        # return HttpResponseRedirect(instance.get_absolute_url())
     # else:
     #     messages.error(request, 'Save failed Update', extra_tags='html_safe')
     context = {

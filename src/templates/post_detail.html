@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <title>{{ title }} details</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="css/style.css" rel="stylesheet">
-    </head>
-    <body>
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li {% if message.tags %} class="{{ message.tags }}"
-        {% endif %}>{% if html_safe in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-    Title: {{ title }}<br/>
-    Id: {{ instance.id }}<br/>
-    Content: {{ instance.content }}<br/>
-    Timestamp: {{ instance.timestamp }}<br/>
-    </body>
-</html>
+{% extends 'base.html' %}
+
+{% block head_title %}{{ instance.title }} | {{ block.super }}{% endblock head_title %}
+
+
+{% block content %}
+<h3>{{ title }}</h3>
+Title: {{ title }}<br/>
+Id: {{ instance.id }}<br/>
+Content: {{ instance.content }}<br/>
+Timestamp: {{ instance.timestamp }}<br/>
+
+{% endblock content %}

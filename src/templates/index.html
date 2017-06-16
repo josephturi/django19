@@ -7,6 +7,16 @@
         <link href="css/style.css" rel="stylesheet">
     </head>
     <body>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}"
+            {% endif %}>{% if html_safe in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     <h3>{{ title }} template</h3>
     {% for obj in object_list %}
     {% url "posts:detail" id=obj.id %}
@@ -15,9 +25,10 @@
         <a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a>
         {{ obj.content }}
         {{ obj.timestamp }}
-        <a href="{{ obj.id }}/edit">Update</a><br/>
+        <a href="{{ obj.id }}/edit">Update</a>
+        <a href="{{ obj.id }}/delete">Delete</a><br/>
     {% endfor %}
-    {{ instance }}
+    <br>
     <a href="{% url 'posts:create' %}">Create</a>
 
     </body>

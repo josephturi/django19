@@ -37,8 +37,19 @@ def post_detail(request, id=None):
     }
     return render(request, "post_detail.html", context)
 
-def post_update(request):
-    return HttpResponse("Update")
+def post_update(request, id=None):
+    instance = get_object_or_404(Post, id=id)
+    form = PostForm(request.POST or None, instance=instance)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+
+    context = {
+        "title": instance.title,
+        "content": instance.content,
+        "form": form,
+    }
+    return render(request, "post_form.html", context)
 
 def post_delete(request):
     return HttpResponse("Delete")

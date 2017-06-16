@@ -14,9 +14,11 @@
 
         <a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a>
         {{ obj.content }}
-        {{ obj.timestamp }}<br/>
+        {{ obj.timestamp }}
+        <a href="{{ obj.id }}/edit">Update</a><br/>
     {% endfor %}
     {{ instance }}
     <a href="{% url 'posts:create' %}">Create</a>
+
     </body>
 </html>

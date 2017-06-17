@@ -6,8 +6,9 @@ from django.core.urlresolvers import reverse
 # MVC Model View Controller
 
 class Post(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=140)
     content = models.TextField()
+    image = models.FileField(null=True, blank=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
 

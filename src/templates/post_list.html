@@ -36,6 +36,25 @@
 <!--{% cycle ""     "</div></div class='row'>"   %}-->
 <!--{% cycle "" "<div class='col-sm-12'><hr/></div></div></div class='row'>" %}-->
 {% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if object_list.has_previous %}
+            <a href="?{{ page_request_var }}={{ object_list.previous_page_number }}"
+            class="btn btn-default" role="button">Previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}
+        </span>
+
+        {% if object_list.has_next %}
+            <a href="?{{ page_request_var }}={{ object_list.next_page_number }}"
+            class="btn btn-default" role="button">Next</a>
+        {% endif %}
+    </span>
+</div>
+
 </div>
 
 

@@ -27,10 +27,24 @@ def post_create(request):
     return render(request, "post_form.html", context)
 
 def post_list(request):
-    queryset = Post.objects.all()#.order_by("-timestamp")
+    queryset_list = Post.objects.all()#.order_by("-timestamp")
+    paginator = Paginator(queryset_list, 7) # Show 7 contacts per page
+    page_request_var = "page"
+    page = request.GET.get(page_request_var)
+    try:
+        queryset = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        queryset = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        queryset = paginator.page(paginator.num_pages)
+
+
     context = {
         "title": "List",
         "object_list": queryset,
+        "page_request_var": page_request_var,
     }
     return render(request, "post_list.html", context)
 

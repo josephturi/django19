@@ -2,11 +2,11 @@
 {% block content %}
 
 <div class="col-sm-8 col-sm-offset-2">
-
     <h1>{{ title }}</h1>
 
 
 {% for obj in object_list %}
+<a href="{% url 'posts:create' %}" class="btn btn-primary" role="button">Create</a>
 <div class="row">
 
 

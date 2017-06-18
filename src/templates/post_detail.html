@@ -19,4 +19,6 @@ Id: {{ instance.id }}<br/>
 Content: {{ instance.content|linebreaks }}<br/>
 Timestamp: {{ instance.timestamp }}<br/>
 
+<div class="fb-comments" data-href="{{ request.build_absolute_url }}"
+data-numposts="10"></div>
 {% endblock content %}

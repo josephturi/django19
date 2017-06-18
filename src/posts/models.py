@@ -4,11 +4,17 @@ from django.core.urlresolvers import reverse
 
 # Create your models here.
 # MVC Model View Controller
+def upload_location(instance, filename):
+    return "%s/%s" %(instance.id, filename)
+    # filebase, extension=filename.split(".")
+    # return "%s/%s.%s" %(instance.id, instance.id, extension)
 
 class Post(models.Model):
     title = models.CharField(max_length=140)
     content = models.TextField()
-    image = models.ImageField(null=True, blank=True,
+    image = models.ImageField(upload_to=upload_location,
+            null=True,
+            blank=True,
             height_field="height_field",
             width_field="width_field")
     height_field = models.IntegerField(default=0)

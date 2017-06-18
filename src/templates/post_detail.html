@@ -19,6 +19,19 @@ Id: {{ instance.id }}<br/>
 Content: {{ instance.content|linebreaks }}<br/>
 Timestamp: {{ instance.timestamp }}<br/>
 
-<div class="fb-comments" data-href="{{ request.build_absolute_url }}"
+<div class="fb-like" data-href="{{ request.build_absolute_url }}"
+data-layout="standard" data-action="like" data-size="small" data-show-faces="true"
+data-share="true"></div>
+
+<div class="fb-follow" data-href="{{ request.build_absolute_url }}"
+data-layout="standard" data-size="small" data-show-faces="true"></div><br/>
+
+<div class="fb-send" data-href="https://developers.facebook.com/docs/plugins/"></div>
+
+<div class="container">
+    <div class="fb-comments" data-href="{{ request.build_absolute_url }}"
 data-numposts="10"></div>
+</div>
+
+
 {% endblock content %}

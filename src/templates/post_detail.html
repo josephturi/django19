@@ -4,13 +4,14 @@
 {% block content %}
 
 
-<div class="col-sm-6 col-sm-offset-3">
-
-
-</div>
 <h1>{{ title }} <small> {{ instance.timestamp }}</h1>
-Title: {{ title }}<br/>
-Id: {{ instance.id }}<br/>
+
+
+{% if instance.user.get_full_name %}
+<p>Author: {{ instance.user.get_full_name }}</p>
+{% endif %}
+
+
 
 {% if instance.image %}
 <img src="{{ instance.image.url }}" class="img-responsive" alt="">

@@ -1,15 +1,22 @@
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PostForm
 from .models import Post
 # Create your views here.
 
 def post_create(request):
+    if not request.user.is_staff or not request.user.is_superuser:
+        raise Http404
+
+    if not request.user.is_authenticated():
+        raise Http404
+
     form = PostForm(request.POST, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit=False)
+        instance.user=request.user
         print(form.cleaned_data.get("title"))
         instance.save()
         messages.success(request, 'Successful Create', extra_tags='html_safe')

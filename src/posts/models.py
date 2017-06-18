@@ -1,6 +1,10 @@
 from __future__ import unicode_literals
-from django.db import models
+from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.db import models
+from django.db.models.signals import pre_save
+
+from django.utils.text import slugify
 
 # Create your models here.
 # MVC Model View Controller
@@ -10,6 +14,7 @@ def upload_location(instance, filename):
     # return "%s/%s.%s" %(instance.id, instance.id, extension)
 
 class Post(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     title = models.CharField(max_length=140)
     content = models.TextField()
     image = models.ImageField(upload_to=upload_location,

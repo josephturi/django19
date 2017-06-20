@@ -17,7 +17,13 @@
 <img src="{{ instance.image.url }}" class="img-responsive" alt="">
 {% endif %}
 
-Content: {{ instance.content|linebreaks|safe }}<br/>
+<div class="row">
+<div class="col-sm-12 content-markdown">
+Content: {{ instance.content|safe }}<br/>
+
+</div>
+</div>
+
 Timestamp: {{ instance.timestamp }}<br/>
 
 <div class="fb-like" data-href="{{ request.build_absolute_url }}"

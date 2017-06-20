@@ -53,6 +53,24 @@
  <!--Marked cdnjs.com-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
 
+<script type="text/javascript">
+    // Start jQuery function
+$(document).ready(function(){
+    // Iterator
+    // $(".content-markdown") - for every item here what has the classic content-markdown, let's grab "each" one of them
+    $(".content-markdown").each(function(){
+        // then take the text
+            var content = $(this).text()
+            // then console log the text
+            console.log(content)
+            // and make it to marked down
+            var markedContent = marked(content)
+            console.log(markedContent)
+
+    })
+})
+</script>
+
     </body>
 </html>
 

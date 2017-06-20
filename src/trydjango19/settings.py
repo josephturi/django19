@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Third party libraries
     'pagedown',
+    'markdown-deux',
 
     # Local libraries
     'posts',

@@ -3,7 +3,9 @@
 {% block head_title %}{{ instance.title }} | {{ block.super }}{% endblock head_title %}
 {% block content %}
 
-{{ instance.content|urlify }}
+1. {{ instance.content|urlify|truncatechars:70 }}<br>
+2. {{ share_string|truncatechars:70 }}
+
 <h1>{{ title }} <small> {{ instance.timestamp }}</h1>
 
 

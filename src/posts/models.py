@@ -16,6 +16,7 @@ def upload_location(instance, filename):
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     title = models.CharField(max_length=140)
+    slug = models.SlugField(unique=True)
     content = models.TextField()
     image = models.ImageField(upload_to=upload_location,
             null=True,
@@ -40,3 +41,12 @@ class Post(models.Model):
 
     class Meta:
         ordering = ["-timestamp", "-updated"]
+
+def pre_save_post_receiver(sender, instance, *args, **kwargs):
+    slug = slugify(instance.title)
+    exists = Post.objects.filter(slug=slug).exists()
+    if exists:
+        slug = "%s-%s" %(slug, instance.id)
+    instance.slug = slug
+
+pre_save.connect(pre_save_post_receiver, sender=Post)

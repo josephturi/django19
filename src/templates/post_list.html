@@ -37,8 +37,8 @@
                 <p>Author: {{ obj.user.get_full_name }}</p>
                 {% endif %}
         </p>
-        <p><a href="{{ obj.id }}/edit" class="btn btn-primary" role="button">Edit</a>
-        <a href="{{ obj.id }}/delete" class="btn btn-default" role="button">Delete</a></p>
+        <p><a href="{{ obj.slug }}/edit" class="btn btn-primary" role="button">Edit</a>
+        <a href="{{ obj.slug }}/delete" class="btn btn-default" role="button">Delete</a></p>
       </div>
     </div>
   </div>

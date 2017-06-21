@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% load urlify %}
 {% block head_title %}{{ instance.title }} | {{ block.super }}{% endblock head_title %}
 {% block content %}
 
-
+{{ instance.content|urlify }}
 <h1>{{ title }} <small> {{ instance.timestamp }}</h1>
 
 
@@ -29,14 +30,10 @@
 <p><a href="./edit" class="btn btn-primary" role="button">Edit</a>
 <a href="./delete" class="btn btn-default" role="button">Delete</a></p>
 
-Timestamp: {{ instance.timestamp }}<br/>
+Timestamp: {{ instance.timestamp }}
+<a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ instance.content|urlify }}.">Reddit</a>
 
 <div class="row">
-<<<<<<< HEAD
-<a href="http://www.reddit.com/submit?url={{ request.build_absolute_uri }}&title={{ share_string }}.">Reddit</a>
-=======
-
->>>>>>> a28d0463e9066b31580c1b9b2d44a55ca74d70e4
 
 <div class="fb-like" data-href="{{ request.build_absolute_uri }}"
 data-layout="standard" data-action="like" data-size="small" data-show-faces="true"

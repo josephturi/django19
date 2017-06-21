@@ -1,5 +1,6 @@
 from urllib.parse import quote_plus
 from django.contrib import messages
+from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404, redirect
@@ -35,7 +36,7 @@ def post_create(request):
     return render(request, "post_form.html", context)
 
 def post_list(request):
-    queryset_list = Post.objects.all()#.order_by("-timestamp")
+    queryset_list = Post.objects.all().filter(draft=False).filter(publish__lte=timezone.now())#.order_by("-timestamp")
     paginator = Paginator(queryset_list, 7) # Show 7 contacts per page
     page_request_var = "page"
     page = request.GET.get(page_request_var)

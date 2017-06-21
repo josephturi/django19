@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -19,14 +20,16 @@ class Post(models.Model):
     slug = models.SlugField(unique=True)
     content = models.TextField()
     image = models.ImageField(upload_to=upload_location,
-            null=True,
-            blank=True,
-            height_field="height_field",
-            width_field="width_field")
+        null=True,
+        blank=True,
+        height_field="height_field",
+        width_field="width_field")
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+    draft = models.BooleanField(default=False)
+    publish = models.DateField(auto_now=False, auto_now_add=False)
 
     def __unicode__(self):
         return self.title

@@ -8,34 +8,26 @@
 <a href="{% url 'posts:create' %}" class="btn btn-primary" role="button">Create</a>
 {% for obj in object_list %}
 <div class="row">
-
-
   <div class="col-sm-12">
     <div class="thumbnail">
         {% if obj.image %}
         <img src="{{ obj.image.url }}" class="img-responsive" alt="">
         {% endif %}
-
       <div class="caption">
         <h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h3>
+        {% if obj.user.get_full_name %}
+        <p>Author: {{ obj.user.get_full_name }} ID: {{ obj.id }}</p>
+        {% endif %}
         <p>
-
-                {{ obj.id }}
 
                 <div class="row">
                 <div class="col-sm-12">
                     <div class="content-markdown">{{ obj.content }}</div>
                     <hr/>
                     <br/>
-
                 </div>
                 </div>
-
-                {{ obj.timestamp }}<br/>
-                ({{ obj.timestamp|timesince }} ago)
-                {% if obj.user.get_full_name %}
-                <p>Author: {{ obj.user.get_full_name }}</p>
-                {% endif %}
+                Posted: {{ obj.publish }}<br/>
         </p>
         <p><a href="{{ obj.slug }}/edit" class="btn btn-primary" role="button">Edit</a>
         <a href="{{ obj.slug }}/delete" class="btn btn-default" role="button">Delete</a></p>

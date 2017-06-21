@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<div class='col-sm-12 col-sm-offset-2'>
+    <h1>{{ title }}</h1>
+<form method='GET' action=''>
+<input type='text' name='q' placeholder='Search posts' value='{{ request.GET.q }}'/>
+<input type='submit' value='Search' />
+</form>
+</div>
 <div class="col-sm-8 col-sm-offset-2">
     <h1>{{ title }}</h1>
 
@@ -14,7 +21,7 @@
         <img src="{{ obj.image.url }}" class="img-responsive" alt="">
         {% endif %}
       <div class="caption">
-        <h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }}</a></h3>
+        <h3><a href="{{ obj.get_absolute_url }}">{{ obj.title }} {% if obj.draft %}<span style="color:red;">Draft</span>{% endif %}</a></h3>
         {% if obj.user.get_full_name %}
         <p>Author: {{ obj.user.get_full_name }} ID: {{ obj.id }}</p>
         {% endif %}

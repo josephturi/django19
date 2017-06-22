@@ -66,10 +66,10 @@ $(document).ready(function(){
         // then take the text
             var content = $(this).text()
             // then console log the text
-            console.log(content)
+            console.log("1. content", content)
             // and make it to marked down
             var markedContent = marked(content)
-            console.log(markedContent)
+            console.log("2. content", markedContent)
             $(this).html(markedContent)
     })
     $(".content-markdown img").each(function(){

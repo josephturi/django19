@@ -44,9 +44,11 @@ def post_list(request):
     if query:
         queryset_list = queryset_list.filter(
             Q(title__icontains=query) |
+            Q(user__first_name__icontains=query) |
+            Q(user__last_name__icontains=query) |
             Q(content__icontains=query)
-            )
-    paginator = Paginator(queryset_list, 7) # Show 7 contacts per page
+            ).distinct() # avoid duplicate items
+    paginator = Paginator(queryset_list, 2) # Show 7 contacts per page
     page_request_var = "page"
     page = request.GET.get(page_request_var)
     try:

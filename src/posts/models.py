@@ -2,12 +2,13 @@ from __future__ import unicode_literals
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.utils import timezone
 from django.db import models
 from django.db.models.signals import pre_save
-
+from django.utils import timezone
 from django.utils.text import slugify
+from django.utils.safestring import mark_safe
 
+from markdown_deux import markdown
 
 # MVC Model View Controller
 
@@ -17,7 +18,7 @@ class PostManager(models.Manager):
         return super(PostManager, self).filter(draft=False).filter(publish__lte=timezone.now())
 
 def upload_location(instance, filename):
-    return "%s/%s" %(instance.id, filename)
+    return "%s/%s" %(instance.slug, filename)
     # filebase, extension=filename.split(".")
     # return "%s/%s.%s" %(instance.id, instance.id, extension)
 
@@ -53,6 +54,10 @@ class Post(models.Model):
 
     class Meta:
         ordering = ["-timestamp", "-updated"]
+
+    def get_markdown(self):
+        content = self.content
+        return mark_safe(markdown(content))
 
 def create_slug(instance, new_slug=None):
     slug = slugify(instance.title)

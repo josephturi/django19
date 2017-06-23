@@ -48,7 +48,7 @@ def post_list(request):
             Q(user__last_name__icontains=query) |
             Q(content__icontains=query)
             ).distinct() # avoid duplicate items
-    paginator = Paginator(queryset_list, 2) # Show 7 contacts per page
+    paginator = Paginator(queryset_list, 5) # Show 7 contacts per page
     page_request_var = "page"
     page = request.GET.get(page_request_var)
     try:
@@ -91,7 +91,7 @@ def post_update(request, slug=None):
         instance = form.save(commit=False)
         instance.save()
         messages.success(request, 'Successful Update', extra_tags='html_safe')
-        return redirect('posts:list')
+        return redirect('.')
         # return HttpResponseRedirect(instance.get_absolute_url())
     # else:
     #     messages.error(request, 'Save failed Update', extra_tags='html_safe')

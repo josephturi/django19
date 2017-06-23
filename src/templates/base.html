@@ -63,20 +63,45 @@ $(document).ready(function(){
     // $(".content-markdown") - for every item here what has the classic content-markdown,
     // let's grab "each" one of them
     $(".content-markdown").each(function(){
-        // then take the text
-            var content = $(this).text()
-            // then console log the text
+            var content = $(this).text()        // then take the text
             console.log("1. content", content)
-            // and make it to marked down
-            var markedContent = marked(content)
+            var markedContent = marked(content)             // and make it to marked down
             console.log("2. content", markedContent)
             $(this).html(markedContent)
     })
     // $(".content-markdown img").each(function(){
     $(".post-detail-item img").each(function(){
             $(this).addClass("img-responsive");
+
     })
+
+    var titleInput = $("#id_title")
+    $("#preview-title").html(titleInput.val());
+
+    var contentInput = $("#id_content")
+    $("#preview-content").html(marked(contentInput.val()));
+
+    function setContent(value){
+        var markedContent = marked(value)
+        $("#preview-content").html(markedContent)
+        $("#preview-content img").each(function(){
+            $(this).addClass("img-responsive");
+        })
+
+    }
+    setContent(contentInput.val())
+
+    contentInput.keyup(function(){
+        var newContent = $(this).val()
+            setContent(newContent)
+
+    })
+// preview-title
+// preview-content
+
 })
+
+
 
 </script>
 

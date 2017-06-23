@@ -4,8 +4,11 @@
 <div class='col-sm-12 col-sm-offset-2'>
     <h1>{{ title }}</h1>
 <form method='GET' action=''>
+    <div class="input-group">
 <input type='text' name='q' placeholder='Search posts' value='{{ request.GET.q }}'/>
 <input type='submit' value='Search' />
+
+    </div>
 </form>
 </div>
 <div class="col-sm-8 col-sm-offset-2">
